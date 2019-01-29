@@ -1,0 +1,111 @@
+#
+127.0.0.1	localhost xps13
+
+### Travelodge PPE  ###########################################
+
+10.41.89.10	TVL10NFV01PPE	#	PPE	NGINX
+10.41.89.11	TVL10NFV02PPE	#	PPE	NGINX
+
+10.41.89.75	TVL10WEB10PPE	#	PPE	PHP
+10.41.89.76	TVL10WEB11PPE	#	PPE	PHP
+
+10.41.89.171	TVL10APP05PPE	#	PPE	Admin (Drupal)
+
+10.41.89.172	TVL10APP12PPE	#	PPE	Endecca
+10.41.89.239	TVL10APP03PPE	#	PPE	Endecca
+10.41.89.240	TVL10APP04PPE	#	PPE	Endecca
+
+10.41.89.203	TVL10DBH01PPE	#	PPE	DB (MySQL)
+10.41.89.204	TVL10DBH02PPE	#	PPE	DB (MySQL)
+10.41.89.205	TVL10DBH03PPE	#	PPE	DB (MySQL)
+
+10.41.89.235	TVL10APP06PPE	#	PPE	Kiosk
+10.41.89.236	TVL10APP07PPE	#	PPE	Kiosk
+
+10.41.89.90	TVL10WEB21PPE	#	PPE	Apache (Legacy)
+10.41.89.91	TVL10WEB22PPE	#	PPE	Apache (Legacy)
+
+### Travelodge PROD ###########################################
+
+10.80.89.10	TVL10NFV01PRD	#	PROD	NGINX
+10.80.89.11	TVL10NFV02PRD	#	PROD	NGINX
+
+10.80.89.75	TVL10WEB10PRD	#	PROD	PHP
+10.80.89.76	TVL10WEB11PRD	#	PROD	PHP
+10.80.89.81	TVL10WEB13PRD	#	PROD	PHP
+10.80.89.82	TVL10WEB14PRD	#	PROD	PHP
+10.80.89.83	TVL10WEB15PRD	#	PROD	PHP
+10.80.89.77	TVL10WEB16PRD	#	PROD	PHP
+
+10.80.89.235	TVL10APP06PRD	#	PROD	Kiosk
+10.80.89.236	TVL10APP07PRD	#	PROD	Kiosk
+
+10.80.89.172	TVL10APP05PRD	#	PROD	Admin (Drupal)
+
+10.80.89.203	TVL10DBH01PRD	#	PROD	DB (Mongo)
+10.80.89.204	TVL10DBH02PRD	#	PROD	DB (Mongo)
+10.80.89.205	TVL10DBH03PRD	#	PROD	DB (Mongo)
+
+10.80.89.171	TVL10APP12PRD	#	PROD	Endecca
+10.80.89.239	TVL10APP13PRD	#	PROD	Endecca
+10.80.89.240	TVL10APP14PRD	#	PROD	Endecca
+
+10.41.90.9	TVL10DBM04PRD	#	PROD	DB (MySQL)
+10.41.90.10	TVL10DBM05PRD	#	PROD	DB (MySQL)
+10.41.90.11	TVL10DBM06PRD	#	PROD	DB (MySQL)
+10.33.90.10	TVL16DBM01DR	#	PROD	DB (MySQL)
+10.33.90.11	TVL16DBM02DR	#	PROD	DB (MySQL)
+
+10.80.89.90	TVL70WEB01PRD	#	PROD	Apache (Legacy)
+10.80.89.91	TVL70WEB02PRD	#	PROD	Apache (Legacy)
+10.80.89.92	TVL70WEB03PRD	#	PROD	Apache (Legacy)
+10.80.89.93	TVL70WEB04PRD	#	PROD	Apache (Legacy)
+10.80.89.94	TVL70WEB05PRD	#	PROD	Apache (Legacy)
+10.80.89.97	TVL70WEB08PRD	#	PROD	Apache (Emprsas)
+10.80.89.98	TVL70WEB09PRD	#	PROD	Apache (Emprsas)
+10.80.90.80	TVL70APP01PRD	#	PROD	Refund Server
+
+54.77.54.176	AWS-JENKINS	#	ec2-user@54.77.54.176
+# ssh -i ~/.ssh/jenkins_prod_ops.pem ec2-user@54.77.54.176
+10.125.1.163	jenkins.travelodge.co.uk
+
+# new drupal/ngas
+10.41.89.171	admin-ppe.travelodge.co.uk
+10.80.89.172    admin.travelodge.co.uk
+
+# Search & Speed - Pre-Production
+10.41.90.171	TVL10APP13PPE	#	PPE Search API	
+10.41.90.165	TVL10WEB23PPE	#	PPE React
+10.41.90.166	TVL10WEB24PPE	#	Redis
+10.41.90.167	TVL10WEB25PPE	#	RabbitMQ
+10.41.90.168	TVL10WEB26PPE	#	ElasticSearch
+10.41.90.169	TVL10WEB27PPE	#       ElasticSearch
+10.41.90.170	TVL10WEB28PPE	#       ElasticSearch
+
+### Local ######################################################
+
+172.18.0.2	mysql1
+172.18.0.3	mysql2
+172.18.0.4	registry
+
+###
+
+# 10.41.89.91	ngpreprod.travelodge.co.uk preprod.travelodge.co.uk
+
+### AWS #######################################################
+
+3.8.93.171 	172.31.5.190	ansible_master
+3.8.91.113	172.31.2.230	ansible_client1
+18.130.224.123	172.31.17.161	ansible_client2
+3.8.39.132	172.31.30.61	ansible_client3
+3.8.96.97			ansible_client4
+
+18.130.80.7	jenkins2
+35.178.207.114	jenkins
+
+### Wickes ####################################################
+10.34.120.173 	selenium.pipe.wx.wickestest03.aws.travisperkins.cloud
+10.34.120.219 	jenkins.master.devops.wickestest03.aws.travisperkins.cloud
+10.34.120.138 	jenkins.pipe.wx.wickestest03.aws.travisperkins.cloud
+10.34.120.34 	jenkins.pipe.cloudshop.wickestest03.aws.travisperkins.cloud
+10.34.120.78 	jenkins.master.wx.wickestest03.aws.travisperkins.cloud

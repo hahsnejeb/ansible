@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SESSION=tmux-ppe-mysql-and-mongo
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh bshah@tvl10dbm05prd" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh bshah@tvl10dbm04prd" C-m
+tmux split-window -v
+tmux send-keys "ssh bshah@tvl10dbm06prd" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

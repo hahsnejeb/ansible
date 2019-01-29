@@ -1,0 +1,6 @@
+Host gitlab.com
+  Hostname altssh.gitlab.com
+  User git
+  Port 443
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa

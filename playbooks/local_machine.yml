@@ -1,0 +1,69 @@
+---
+- name: configure local desktop
+  hosts: localhost
+  vars:
+  
+  roles:
+    - role: dockerhost
+      become: True
+      # - role: travelodge
+    - role: aws
+    - role: chats
+    - role: std_apps
+    - role: media
+    - role: wickes
+
+  tasks:
+    - name: tmux configuration file
+      copy: src=files/tmux.conf dest=~/.tmux.conf
+
+    - name: install chrome
+      become: True
+      apt:
+        deb: "{{ chrome_deb }}"
+
+    - name: bashrc
+      copy: src=files/bashrc dest=~/.bashrc
+
+
+    - name: bashrc-git
+      copy: src=files/bashrc-git dest=~/.bashrc-git
+
+    - name: install ~/.ssh directory
+      file: 
+        name: ~/.ssh
+        state: directory
+
+    - name: install private ssh key
+      copy: 
+        src: files/id_rsa
+        dest: ~/.ssh/id_rsa
+        mode: 0600
+
+    - name: install public ssh key
+      copy: 
+        src: files/id_rsa.pub
+        dest: ~/.ssh/id_rsa.pub
+        mode: 0600
+ 
+# find . -type f -printf "%h/\"%f\" " | xargs ansible-vault encrypt
+
+    - name: install gnupg and pass
+      copy: 
+        src: "files/{{ item }}/"
+        dest: "~/{{ item }}/"
+        mode: 0700
+      with_items:
+        - .gnupg/
+        - .password-store/
+
+    - name: configure grub
+      become: True
+      copy:
+        src: grub
+        dest: /etc/default/grub
+        owner: root
+        group: root
+# the above grub configu does not work - need to fix
+
+# *** need to setup grive still ***

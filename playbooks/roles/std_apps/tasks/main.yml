@@ -1,0 +1,40 @@
+- name: install general packages
+  become: True
+  apt: name={{ item }} update-cache=yes
+  with_items:
+    - git
+    - tmux
+    - vim
+    - curl
+    - net-tools
+    - default-jdk
+    - mysql-workbench
+    - gnome-tweaks
+    - pass
+
+- name: add grive repo
+  become: True
+  apt_repository:
+    repo: "{{ grive_repo }}"
+
+- name: install grive
+  become: True
+  apt: name=grive update-cache=yes
+
+- name: install terraform
+  become: True
+  copy:
+    src: terraform
+    dest: /usr/local/bin/terraform
+    mode: 0755
+
+- name: install packer
+  become: True
+  copy:
+    src: packer
+    dest: /usr/local/bin/packer
+    mode: 0755
+
+# the below subcommand is not passing to ansible
+# - name: autocomplete ansible commands
+#   shell: "/usr/local/bin/packer -autocomplete-install"

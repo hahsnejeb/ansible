@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SESSION=tmux-prod-refund
+
+tmux new-session -d -s $SESSION
+
+tmux send-keys "ssh bshah@TVL70APP01PRD" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

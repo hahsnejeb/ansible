@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SESSION=tmux-ppe-php
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh bshah@TVL10WEB10PPE" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh bshah@TVL10WEB11PPE" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

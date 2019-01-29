@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SESSION=tmux-prod-search-elastic
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh bshah@10.80.90.171" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh bshah@10.80.90.172" C-m
+tmux split-window -v
+tmux send-keys "ssh bshah@10.80.90.174" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

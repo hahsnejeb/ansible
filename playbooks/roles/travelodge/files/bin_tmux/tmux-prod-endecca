@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SESSION=tmux-prod-endecca
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh bshah@TVL10APP12PRD" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh bshah@TVL10APP13PRD" C-m
+tmux split-window -v
+tmux send-keys "ssh bshah@TVL10APP14PRD" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

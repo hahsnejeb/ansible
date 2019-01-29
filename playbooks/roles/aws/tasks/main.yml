@@ -1,0 +1,5 @@
+- name: install aws private ssh key
+  copy: 
+    src: aws_bejen.pem
+    dest: ~/.ssh/aws_bejen.pem
+    mode: 0600

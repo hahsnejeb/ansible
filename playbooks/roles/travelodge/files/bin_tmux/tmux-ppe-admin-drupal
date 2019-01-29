@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SESSION=tmux-ppe-admin-drupal
+
+tmux new-session -d -s $SESSION
+
+tmux send-keys "ssh bshah@TVL10APP05PPE" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

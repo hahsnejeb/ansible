@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SESSION=tmux-ppe-nginx
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh bshah@TVL10NFV01PPE" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh bshah@TVL10NFV02PPE" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

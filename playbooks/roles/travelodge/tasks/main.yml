@@ -1,0 +1,56 @@
+- name: create the bin directory
+  file:
+    path: ~/bin
+    state: directory
+
+- name: create bin directory for tmux
+  synchronize: 
+    src: bin_tmux
+    dest: ~/bin/
+
+- name: include bin_tmux in PATH
+  lineinfile:
+    path: ~/.bashrc
+    line: 'export PATH=$PATH:~/bin/bin_tmux'
+
+- name: install vpnc
+  become: True
+  apt: name=vpnc
+
+- name: include the mindtree vpn config
+  become: True
+  copy:
+    src: vpn_mindtree
+    dest: /etc/vpnc/vpn_mindtree
+
+- name: install travelodge /etc/hosts file
+  copy:
+    src: travelodge_hosts_file
+    dest: /etc/hosts
+  become: True
+
+- name: install some private keys
+  copy:
+    src: "{{ item }}"
+    dest: "~/.ssh/{{ item }}"
+    mode: 0600
+  with_items:
+    - jenkins_prod_ops.pem
+    - jenkins_prod_ops.ppk
+
+- name: git clone bitbucket repos
+  git:
+    clone: yes
+    repo: "git@bitbucket.org:travelodgical/{{ item }}.git"
+    dest: "~/travelodge/bitbucket_repos/{{ item }}"
+    update: yes
+  with_items:
+    - devops
+    - ng
+    - ng-ansible-deploy
+    - travelodgeecommerce
+    - api-gateway
+    - search
+    - tl-web
+    - suggestion
+    - tripadvisor
