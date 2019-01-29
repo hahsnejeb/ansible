@@ -12,6 +12,11 @@
     - gnome-tweaks
     - pass
 
+- name: Install a microsoft visual code 
+  become: True
+  apt:
+    deb: https://go.microsoft.com/fwlink/?LinkID=760868
+
 - name: add grive repo
   become: True
   apt_repository:

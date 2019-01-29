@@ -1,0 +1,10 @@
+#
+127.0.0.1	localhost xps13
+
+### Wickes ####################################################
+
+10.34.120.173 	selenium.pipe.wx.wickestest03.aws.travisperkins.cloud
+10.34.120.219 	jenkins.master.devops.wickestest03.aws.travisperkins.cloud
+10.34.120.138 	jenkins.pipe.wx.wickestest03.aws.travisperkins.cloud
+10.34.120.34 	jenkins.pipe.cloudshop.wickestest03.aws.travisperkins.cloud
+10.34.120.78 	jenkins.master.wx.wickestest03.aws.travisperkins.cloud
