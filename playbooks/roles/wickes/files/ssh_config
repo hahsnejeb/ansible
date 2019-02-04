@@ -4,3 +4,9 @@ Host gitlab.com
   Port 443
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_rsa
+Host github.com
+  Hostname ssh.github.com
+  User git
+  Port 443
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa

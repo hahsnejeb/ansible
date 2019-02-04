@@ -11,6 +11,7 @@
     - mysql-workbench
     - gnome-tweaks
     - pass
+    - terminator
 
 - name: Install a microsoft visual code 
   become: True
