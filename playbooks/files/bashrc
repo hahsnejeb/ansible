@@ -124,4 +124,8 @@ alias ap=ansible-playbook
 export PATH=$PATH:~/Downloads/apache-jmeter-5.0/bin
 alias ap="ansible-playbook --ask-vault-pass"
 
+# set empty for unlimited history:
+HISTSIZE=
+HISTFILESIZE=
+
 # . ~/.bashrc-git
