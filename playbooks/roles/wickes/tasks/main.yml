@@ -1,6 +1,6 @@
-- name: create the bin directory
+- name: create the wickes directory
   file:
-    path: ~/bin
+    path: ~/wickes
     state: directory
 
 - name: install wickes /etc/hosts file
@@ -14,19 +14,67 @@
     src: ssh_config
     dest: ~/.ssh/config
 
-  # - name: git clone bitbucket repos
-  #   git:
-  #   clone: yes
-  #   repo: "git@bitbucket.org:travelodgical/{{ item }}.git"
-  #   dest: "~/travelodge/bitbucket_repos/{{ item }}"
-  #   update: yes
-  # with_items:
-  #   - devops
-  #   - ng
-  #   - ng-ansible-deploy
-  #   - travelodgeecommerce
-  #   - api-gateway
-  #   - search
-  #   - tl-web
-  #   - suggestion
-  #   - tripadvisor
+- name: create the repos directory
+  file:
+    path: ~/wickes/repos
+    state: directory
+
+- name: git clone bitbucket devops_ccoe repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/devops_ccoe/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - vm-image-factory
+    - JenkinsPipelines
+
+- name: git clone bitbucket devops repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/devops/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - infrastructure
+    - hybris
+
+- name: git clone bitbucket cloudshop repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/cloudshop/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - cloudshop
+
+- name: git clone the infrastructure artemis repos
+  git:
+    clone: yes
+    repo: "https://github.com/travisperkins/artemis.git"
+    dest: "~/wickes/repos/infrastructure/artemis"
+    update: yes
+- name: git clone the infrastructure cloudshop ansible repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/devops/cloudshop-ansible.git"
+    dest: "~/wickes/repos/infrastructure/cloudshop-ansible"
+    update: yes
+- name: git clone the infrastructure core-ansible repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/devops/core-ansible.git"
+    dest: "~/wickes/repos/infrastructure/core-ansible"
+    update: yes
+- name: git clone the infrastructure wickes non-production repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/secrets/wickes-non-production.git"
+    dest: "~/wickes/repos/infrastructure/wickes-non-production"
+    update: yes
+- name: git clone the infrastructure wickes production repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/secrets/wickes-production.git"
+    dest: "~/wickes/repos/infrastructure/wickes-production"
+    update: yes

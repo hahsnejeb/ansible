@@ -1,88 +1,61 @@
----
-- name: configure local desktop
-  hosts: localhost
-  vars:
-  
-  roles:
-    - role: dockerhost
-      become: True
-  # - role: travelodge
-    - role: aws
-    - role: chats
-    - role: wickes
+- name: create the wickes directory
+  file:
+    path: ~/wickes
+    state: directory
 
-  tasks:
-    - name: install general packages
-      become: True
-      apt: name={{ item }} update-cache=yes
-      with_items:
-        - git
-        - tmux
-        - vim
-        - curl
-        - net-tools
-        - default-jdk
-        - mysql-workbench
-        - gnome-tweaks
-        - pass
+- name: install wickes /etc/hosts file
+  copy:
+    src: wickes_hosts_file
+    dest: /etc/hosts
+  become: True
 
-    - name: bashrc
-      copy: src=files/bashrc dest=~/.bashrc
+- name: install ssh to github on 443
+  copy:
+    src: ssh_config
+    dest: ~/.ssh/config
 
-    - name: tmux configuration file
-      copy: src=files/tmux.conf dest=~/.tmux.conf
+- name: create the repos directory
+  file:
+    path: ~/wickes/repos
+    state: directory
 
-    - name: install chrome
-      become: True
-      apt:
-      #deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        deb: "{{ chrome_deb }}"
+- name: git clone bitbucket idevops_ccoe repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/devops_ccoe/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - vm-image-factory
+    - JenkinsPipelines
+    - cloudshop
 
-    - name: add grive repo
-      become: True
-      apt_repository:
-        repo: ppa:nilarimogard/webupd8
+- name: git clone bitbucket devops repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/devops/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - infrastructure
+    - hybris
+    - core-ansible
 
-    - name: install grive
-      become: True
-      apt: name=grive update-cache=yes
+- name: git clone bitbucket cloudshop repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/cloudshop/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - cloudshop
 
-    - name: install ~/.ssh directory
-      file: 
-        name: ~/.ssh
-        state: directory
+- name: git clone bitbucket micro-services repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com/wickesit/ccoe/{{ item }}.git"
+    dest: "~/wickes/repos/{{ item }}"
+    update: yes
+  with_items:
+    - microservices-infrastructure
 
-    - name: install private ssh key
-      copy: 
-        src: files/id_rsa
-        dest: ~/.ssh/id_rsa
-        mode: 0600
-
-    - name: install public ssh key
-      copy: 
-        src: files/id_rsa.pub
-        dest: ~/.ssh/id_rsa.pub
-        mode: 0600
- 
-# find . -type f -printf "%h/\"%f\" " | xargs ansible-vault encrypt
-
-    - name: install gnupg and pass
-      copy: 
-        src: "files/{{ item }}/"
-        dest: "~/{{ item }}/"
-        mode: 0700
-      with_items:
-        - .gnupg/
-        - .password-store/
-
-    - name: configure grub
-      become: True
-      copy:
-        src: grub
-        dest: /etc/default/grub
-        owner: root
-        group: root
-# the above grub configu does not work - need to fix
-
-
-# *** need to setup grive still ***

@@ -17,6 +17,7 @@
   become: True
   apt:
     deb: https://go.microsoft.com/fwlink/?LinkID=760868
+    state: present
 
 - name: add grive repo
   become: True
@@ -26,6 +27,7 @@
 - name: install grive
   become: True
   apt: name=grive update-cache=yes
+  state: present
 
 - name: install terraform
   become: True

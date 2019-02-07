@@ -9,6 +9,7 @@
 
 - name: install docker-ce
   apt: name=docker-ce update-cache=yes
+  state: present
 
 - name: add user to docker group
   user: name={{ ansible_user_id }} groups=docker
