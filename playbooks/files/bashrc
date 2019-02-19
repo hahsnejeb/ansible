@@ -120,6 +120,7 @@ EDITOR=vim
 alias vi=vim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/bin/bin_tmux
+export PATH=$PATH:~/Downloads/apache-ant-1.10.5/bin
 alias ap=ansible-playbook
 export PATH=$PATH:~/Downloads/apache-jmeter-5.0/bin
 alias ap="ansible-playbook --ask-vault-pass"

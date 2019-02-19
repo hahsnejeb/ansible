@@ -1,0 +1,3 @@
+# disable touchscreen display
+xinput disable `xinput|grep ELAN24EE|sed 's/.*id\=//'|sed 's/\t.*$//'`
+

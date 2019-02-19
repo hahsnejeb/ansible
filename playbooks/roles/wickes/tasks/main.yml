@@ -19,6 +19,23 @@
     path: ~/wickes/repos
     state: directory
 
+- name: create directory for smart-mocks
+  file:
+    path: ~/wickes/repos/smart-mocks
+    state: directory
+
+- name: git clone bitbucket smart-mocks repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/cloudshop/smart-mocks/{{ item }}.git"
+    dest: "~/wickes/repos/smart-mocks/{{ item }}"
+    update: yes
+  with_items:
+    - mock-notification-service
+    - mock-payment
+    - mock-smartfulfilment
+    - mock-paypal
+
 - name: git clone bitbucket devops_ccoe repos
   git:
     clone: yes
@@ -78,3 +95,19 @@
     repo: "git@gitlab.com:wickesit/cloudshop/secrets/wickes-production.git"
     dest: "~/wickes/repos/infrastructure/wickes-production"
     update: yes
+
+- name: install openfortigui
+  become: True
+  apt:
+    deb: https://apt.iteas.at/iteas/pool/main/o/openfortigui/openfortigui_0.7.2-3_bionic_amd64.deb
+
+- name: wickes fortigate config
+  copy: 
+    src: "openfortigui_wickes.conf"
+    dest: "~/.openfortigui/vpnprofiles/wickes.conf"
+
+- name: dns resolver
+  copy:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+  become: True
