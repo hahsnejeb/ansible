@@ -1,0 +1,7 @@
+- name: copy scripts to ~/bin
+  copy:
+    src: "{{ item }}"
+    dest: "~/bin/{{ item }}"
+    mode: "0755"
+  with_items:
+   - getSSHkey.sh

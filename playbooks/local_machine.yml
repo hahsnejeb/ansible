@@ -12,6 +12,7 @@
     - role: std_apps
     - role: media
     - role: wickes
+    - role: scripts
 
   tasks:
     - name: tmux configuration file
