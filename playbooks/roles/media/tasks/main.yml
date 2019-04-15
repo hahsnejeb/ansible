@@ -1,5 +1,5 @@
-- name: install media packages
-  become: True
-  apt: name={{ item }} update-cache=yes
-  with_items:
-    - kodi
+# - name: install media packages
+#   become: True
+#   apt: name={{ item }} update-cache=yes
+#   with_items:
+#     - kodi

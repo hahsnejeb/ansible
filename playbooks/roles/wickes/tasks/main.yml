@@ -19,6 +19,11 @@
     path: ~/wickes/repos
     state: directory
 
+- name: create the ccoe directory
+  file:
+    path: ~/wickes/repos/ccoe
+    state: directory
+
 - name: create directory for smart-mocks
   file:
     path: ~/wickes/repos/smart-mocks
@@ -56,6 +61,18 @@
     - infrastructure
     - hybris
 
+- name: git clone bitbucket ccoe repos
+  git:
+    clone: yes
+    repo: "git@gitlab.com:wickesit/ccoe/{{ item }}.git"
+    dest: "~/wickes/repos/ccoe/{{ item }}"
+    update: yes
+  with_items:
+    - microservices-infrastructure
+    - terraform-modules
+    - terraform-ormapps
+    - terraform
+
 - name: git clone bitbucket cloudshop repos
   git:
     clone: yes
@@ -71,6 +88,14 @@
     repo: "https://github.com/travisperkins/artemis.git"
     dest: "~/wickes/repos/infrastructure/artemis"
     update: yes
+
+- name: git clone the infrastructure terraform repos
+  git:
+    clone: yes
+    repo: "https://gitlab.com/wickesit/cloudshop/devops/terraform.git"
+    dest: "~/wickes/repos/infrastructure/terraform"
+    update: yes
+
 - name: git clone the infrastructure cloudshop ansible repos
   git:
     clone: yes
@@ -111,3 +136,14 @@
     src: resolv.conf
     dest: /etc/resolv.conf
   become: True
+
+- name: install bin dir
+  file:
+    path: "~/wickes/bin"
+    state: "directory"
+
+- name: install aws_get_ssh_key
+  copy:
+    src: aws_get_ssh_key
+    dest: ~/wickes/bin/aws_get_ssh_key
+  mode: 0755
