@@ -1,0 +1,11 @@
+if [ $# -ne 1 ]; then
+	echo "Usage ./aws_get_ssh_key <ssh-key-name>"
+	echo "Eg.   ./aws_get_ssh_key vm-jenkins-slave"
+	exit
+fi
+
+key=${1}
+
+aws ssm get-parameter --name "/wickestest03/privatekey/${key}" --with-decryption --region eu-west-1 | jq .Parameter.Value > /tmp/${key}
+cat /tmp/${key} | sed -e 's/\\n/\n/g' | sed -e 's/"//g' > ~/.ssh/${key}.pem
+chmod 400 ~/.ssh/${key}.pem

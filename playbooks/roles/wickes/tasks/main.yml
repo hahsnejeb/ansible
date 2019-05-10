@@ -92,7 +92,7 @@
 - name: git clone the infrastructure terraform repos
   git:
     clone: yes
-    repo: "https://gitlab.com/wickesit/cloudshop/devops/terraform.git"
+    repo: "git@gitlab.com:/wickesit/cloudshop/devops/terraform.git"
     dest: "~/wickes/repos/infrastructure/terraform"
     update: yes
 
@@ -147,3 +147,19 @@
     src: aws_get_ssh_key
     dest: ~/wickes/bin/aws_get_ssh_key
   mode: 0755
+
+- name: create the bin directory
+  file:
+    path: ~/wickes/bin
+    state: directory
+
+- name: create bin directory 
+  synchronize:
+    src: bin
+    dest: ~/wickes/
+
+- name: include bin_tmux in PATH
+  lineinfile:
+    path: ~/.bashrc
+    line: 'export PATH=$PATH:~/wickes/bin'
+

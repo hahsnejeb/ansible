@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SESSION=tmux-ssh-test
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 1
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+tmux split-window -v
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+tmux split-window -v
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+tmux split-window -v
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+
+tmux select-pane -t 0
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+tmux split-window -v
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+tmux split-window -v
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+tmux split-window -v
+tmux send-keys "ssh -i ~/.ssh/jenkins-slave.pem ubuntu@10.34.121.152" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

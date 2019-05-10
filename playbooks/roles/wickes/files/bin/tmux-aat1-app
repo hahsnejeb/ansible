@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SESSION=tmux-aat1-app
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh -i ~/.ssh/wickestest03.pem ubuntu@10.34.120.196" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh -i ~/.ssh/wickestest03.pem ubuntu@10.34.121.65" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION

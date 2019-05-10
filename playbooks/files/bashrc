@@ -118,7 +118,7 @@ fi
 
 EDITOR=vim
 alias vi=vim
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:/usr/share/code/bin
 export PATH=$PATH:~/bin/bin_tmux:~/wickes/bin
 export PATH=$PATH:~/Downloads/apache-ant-1.10.5/bin
 alias ap=ansible-playbook

@@ -8,3 +8,8 @@
 10.34.120.138 	jenkins.pipe.wx.wickestest03.aws.travisperkins.cloud
 10.34.120.34 	jenkins.pipe.cloudshop.wickestest03.aws.travisperkins.cloud
 10.34.120.78 	jenkins.master.wx.wickestest03.aws.travisperkins.cloud
+10.32.120.149	jenkins.master.devops.wickesprod03.aws.travisperkins.cloud
+10.32.120.201	jenkins.pipe.wx.wickesprod03.aws.travisperkins.cloud
+
+
+10.34.127.200	sonar76-devops.dev.wickes.co.uk

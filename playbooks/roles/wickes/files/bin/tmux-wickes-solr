@@ -1,0 +1,19 @@
+#!/bin/bash
+
+env=$1
+
+search1=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=search1-solr.${env}.wx.wickestest03.aws.travisperkins.cloud-spot" | jq -r '.Reservations[].Instances[].PrivateIpAddress')
+search2=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=search2-solr.${env}.wx.wickestest03.aws.travisperkins.cloud-spot" | jq -r '.Reservations[].Instances[].PrivateIpAddress')
+
+SESSION=tmux-${env}-solr
+
+tmux new-session -d -s $SESSION
+
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "ssh -i ~/.ssh/vm-solr-search1.pem ubuntu@${search1}" C-m
+tmux select-pane -t 1
+tmux send-keys "ssh -i ~/.ssh/vm-solr-search2.pem ubuntu@${search2}" C-m
+
+# Attach to session
+tmux attach-session -t $SESSION
